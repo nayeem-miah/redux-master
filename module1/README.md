@@ -32,8 +32,8 @@ src/
 ### 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/redux-counter-app.git
-cd redux-counter-app
+git clone https://github.com/nayeem-miah/redux-master/tree/main/module1
+cd module1
 npm install
 ````
 
@@ -55,9 +55,3 @@ npm run build
 * Redux Toolkit
 * Tailwind CSS
 * Vite (or CRA if applicable)
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-```
