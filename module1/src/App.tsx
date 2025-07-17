@@ -10,11 +10,11 @@ function App() {
   const dispatch = useAppDispatch();
   const { count } = useAppSelector((state) => state.counter);
 
-  const handleIncrement = () => {
-    dispatch(increment())
+  const handleIncrement = (number: number) => {
+    dispatch(increment(number))
   }
-  const handleDecrement = () => {
-    dispatch(decrement())
+  const handleDecrement = (number: number) => {
+    dispatch(decrement(number))
   }
   return (
     <>
@@ -23,8 +23,10 @@ function App() {
 
       <div className="text-3xl">count {count}</div>
       <div >
-        <button onClick={handleIncrement} className="bg-green-400 mr-2 p-2 rounded ">increment</button>
-        <button onClick={handleDecrement} className="bg-red-400 p-2 rounded ">decrement</button>
+        <button onClick={() => handleIncrement(1)} className="bg-green-400 mr-2 p-2 rounded mb-2 ">increment</button>
+        <button onClick={() => handleIncrement(5)} className="bg-green-400 mr-2 p-2 rounded mb-2 ">increment By 5</button>
+        <button onClick={() => handleDecrement(1)} className="bg-red-400 p-2 rounded mr-1 ">decrement</button>
+        <button onClick={() => handleDecrement(5)} className="bg-red-400 p-2 rounded ">decrement by 5</button>
       </div>
     </>
   )
