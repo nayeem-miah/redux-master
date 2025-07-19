@@ -26,10 +26,10 @@ export default function Task() {
                 {
                     tasks.map((task) => (
                         <TaskCard
-                            key={task.id}
+                            key={task?.id}
                             task={task}
-                            onDelete={() => handleDelete(task.id)}
-                            onToggleComplete={() => handleToggleComplete(task.id)}
+                            onDelete={() => handleDelete(task?.id)}
+                            onToggleComplete={() => handleToggleComplete(task?.id)}
                         />
                     ))
                 }

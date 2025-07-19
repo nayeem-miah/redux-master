@@ -26,12 +26,17 @@ import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
+import { useAppDispatch } from "@/redux/hooks"
+import { addTask } from "@/redux/features/task/TaskSlice"
 
 export function AddTaskModel() {
     const form = useForm();
+    const dispatch = useAppDispatch();
+
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
+        dispatch(addTask(data))
     }
     return (
         <Dialog>

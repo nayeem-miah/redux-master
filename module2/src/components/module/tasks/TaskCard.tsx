@@ -12,28 +12,30 @@ interface IProps {
 }
 
 export default function TaskCard({ task, onDelete, onToggleComplete }: IProps) {
+    const date = task.dueDate.toString();
+
     return (
         <div>
             <Card className="shadow-md hover:shadow-xl transition">
                 <CardContent className="p-4 space-y-3">
                     <div className="flex justify-between items-center">
-                        <h2 className="text-lg font-semibold">{task.title}</h2>
+                        <h2 className="text-lg font-semibold">{task?.title}</h2>
                         <Badge
-                            variant={task.priority === "high" ? "destructive" : "default"}
+                            variant={task?.priority === "high" ? "destructive" : "default"}
                         >
-                            {task.priority}
+                            {task?.priority}
                         </Badge>
                     </div>
                     <div className={cn("flex justify-between items-center", {
-                        "bg-green-500": task.priority === "low",
-                        "bg-red-500": task.priority === "high",
-                        "bg-yellow-500": task.priority === "medium",
+                        "bg-green-500": task?.priority === "low",
+                        "bg-red-500": task?.priority === "high",
+                        "bg-yellow-500": task?.priority === "medium",
                     })}></div>
-                    <p className="text-sm text-muted-foreground">{task.description}</p>
+                    <p className="text-sm text-muted-foreground">{task?.description}</p>
 
                     <div className="text-sm flex items-center gap-1 text-gray-500">
                         <Clock className="w-4 h-4" />
-                        Due: {task.dueDate}
+                        Due: {date}
                     </div>
 
                     <div className="flex items-center gap-2 text-sm mt-2">

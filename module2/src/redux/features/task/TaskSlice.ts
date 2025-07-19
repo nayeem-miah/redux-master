@@ -1,84 +1,30 @@
 import type { RootState } from "@/redux/store";
 import type { ITask } from "@/types";
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from 'uuid';
 interface InitialState {
     tasks: ITask[],
     filter: "all" | "high" | "medium" | "low"
 }
 const initialState: InitialState = {
-    tasks: [
-        {
-            id: "1",
-            title: "Frontend Setup",
-            description: "Create layout and routing",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "high"
-        },
-        {
-            id: "2",
-            title: "Git Init",
-            description: "Push to GitHub",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "medium"
-        },
-        {
-            id: "4",
-            title: "initialize frontend",
-            description: "Create Home page and Routing .............",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "high"
-        },
-        {
-            id: "5",
-            title: "initialize frontend",
-            description: "Create Home page and Routing .............",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "high"
-        },
-        {
-            id: "3",
-            title: "initialize frontend",
-            description: "Create Home page and Routing .............",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "low"
-        },
-        {
-            id: "irtejhdfgh",
-            title: "initialize frontend",
-            description: "Create Home page and Routing .............",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "medium"
-        },
-        {
-            id: "irtejhgsdfgdfgh",
-            title: "initialize backend",
-            description: "Create Home page and Routing .............",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "high"
-        },
-        {
-            id: "dff",
-            title: "initialize git",
-            description: "code push on github .............",
-            dueDate: "2025-11",
-            isCompleted: false,
-            priority: "high"
-        },
-    ],
+    tasks: [],
     filter: "all"
 }
 const taskSlice = createSlice({
     name: "task",
     initialState,
-    reducers: {}
+    reducers: {
+        addTask: (state, action: PayloadAction<ITask>) => {
+            const id = uuidv4();
+            const taskData = {
+                ...action.payload,
+                id,
+                isCompleted: false
+            }
+
+            state.tasks.push(taskData)
+        }
+    }
 })
 
 export const selectTask = (state: RootState) => {
@@ -88,5 +34,7 @@ export const selectTask = (state: RootState) => {
 export const selectFilter = (state: RootState) => {
     return state.todo.filter
 }
+
+export const { addTask } = taskSlice.actions;
 
 export default taskSlice.reducer;
