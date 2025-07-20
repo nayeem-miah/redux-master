@@ -44,7 +44,6 @@ const taskSlice = createSlice({
             //     isCompleted: false
             // }
             const taskData = createTask(action.payload)
-
             state.tasks.push(taskData)
         },
         toggleCompletedTask: (state, action: PayloadAction<string>) => {
