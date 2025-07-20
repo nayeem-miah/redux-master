@@ -1,19 +1,20 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Trash2 } from "lucide-react"
+import { CheckCircle, Clock, Edit, Trash2 } from "lucide-react"
 import type { ITask } from "@/types"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useAppDispatch } from "@/redux/hooks"
+import { deleteTask, toggleCompletedTask, updateTask } from "@/redux/features/task/TaskSlice"
 
 interface IProps {
     task: ITask
-    onDelete: (id: string) => void
-    onToggleComplete: (id: string) => void
+
 }
 
-export default function TaskCard({ task, onDelete, onToggleComplete }: IProps) {
-    const date = task.dueDate.toString();
-
+export default function TaskCard({ task }: IProps) {
+    const date = task?.dueDate?.toString();
+    const dispatch = useAppDispatch();
     return (
         <div>
             <Card className="shadow-md hover:shadow-xl transition">
@@ -35,7 +36,7 @@ export default function TaskCard({ task, onDelete, onToggleComplete }: IProps) {
 
                     <div className="text-sm flex items-center gap-1 text-gray-500">
                         <Clock className="w-4 h-4" />
-                        Due: {date}
+                        Due: {date || "no date found"}
                     </div>
 
                     <div className="flex items-center gap-2 text-sm mt-2">
@@ -55,14 +56,20 @@ export default function TaskCard({ task, onDelete, onToggleComplete }: IProps) {
                     <div className="flex justify-between mt-4">
                         <Button
                             variant="secondary"
-                            onClick={() => onToggleComplete(task.id)}
+                            onClick={() => dispatch(toggleCompletedTask(task.id))}
                         >
                             {task.isCompleted ? "Undo" : "Mark as Done"}
                         </Button>
 
                         <Button
+                            onClick={() => dispatch(updateTask(task.id))}
+                        >
+                            <Edit className="w-1 h-4 mr-1" />
+                            Update Task
+                        </Button>
+                        <Button
                             variant="destructive"
-                            onClick={() => onDelete(task.id)}
+                            onClick={() => dispatch(deleteTask(task.id))}
                         >
                             <Trash2 className="w-4 h-4 mr-1" />
                             Delete

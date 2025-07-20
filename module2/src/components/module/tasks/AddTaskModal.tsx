@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogFooter,
     DialogHeader,
@@ -12,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { DialogDescription } from "@radix-ui/react-dialog"
-import { useForm } from "react-hook-form"
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 
 import {
     Select,
@@ -28,15 +27,20 @@ import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { useAppDispatch } from "@/redux/hooks"
 import { addTask } from "@/redux/features/task/TaskSlice"
+import type { ITask } from "@/types"
 
 export function AddTaskModel() {
     const form = useForm();
     const dispatch = useAppDispatch();
 
 
-    const onSubmit = (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
         // console.log(data);
-        dispatch(addTask(data))
+        const newData = {
+            ...data,
+            dueDate: data.dueDate.toString()
+        }
+        dispatch(addTask(newData as ITask))
     }
     return (
         <Dialog>
@@ -147,9 +151,6 @@ export function AddTaskModel() {
                         />
                         <br />
                         <DialogFooter>
-                            <DialogClose asChild>
-                                <Button className="bg-red-400">Cancel</Button>
-                            </DialogClose>
                             <Button className="bg-green-300" type="submit">Save changes</Button>
                         </DialogFooter>
                     </form>
