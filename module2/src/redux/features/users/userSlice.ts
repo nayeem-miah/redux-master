@@ -12,7 +12,7 @@ const initialState: InitialState = {
             name: "nayeem"
         }
     ]
-}
+};
 
 type DraftUser = Pick<IUser, "name">
 
@@ -29,11 +29,17 @@ const userSlice = createSlice({
         addUser: (state, action: PayloadAction<IUser>) => {
             const userData = createUser(action.payload);
             state.users.push(userData)
+        },
+        removeUser: (state, action: PayloadAction<string>) => {
+            const id = action.payload;
+            console.log(id);
+            const users = state.users.filter((user) => user.id !== id);
+            state.users = users
         }
     }
 })
 
 
-export const { addUser } = userSlice.actions;
+export const { addUser, removeUser } = userSlice.actions;
 
 export default userSlice.reducer
