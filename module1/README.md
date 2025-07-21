@@ -32,7 +32,7 @@ src/
 ### 📦 Installation
 
 ```bash
-git clone https://github.com/nayeem-miah/redux-master/tree/main/module1
+git clone https://github.com/nayeem-miah/redux-master.git
 cd module1
 npm install
 ````

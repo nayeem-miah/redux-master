@@ -47,7 +47,7 @@ src/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/nayeem-miah/redux-master/tree/main/module2
+git clone https://github.com/nayeem-miah/redux-master.git
 cd module2
 ````
 
@@ -89,8 +89,3 @@ Pull requests are welcome. For major changes, please open an issue first.
 
 ---
 
-## 📄 License
-
-[MIT](LICENSE)
-
-```
