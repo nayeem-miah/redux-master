@@ -27,18 +27,25 @@ import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 import { useState } from "react"
 import { toast } from "sonner"
+import { useCrateTaskMutation } from "@/redux/api/baseApi"
 
 export function AddTaskModel() {
     const form = useForm();
+    const [createTask, { data, isLoading, isError }] = useCrateTaskMutation()
+
+    console.log(data);
 
     const [open, setOpen] = useState<boolean>(false)
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         // console.log(data);
         const newData = {
             ...data,
-            dueDate: data.dueDate.toString()
+            dueDate: data.dueDate.toString(),
+            isCompleted: false
         }
-        console.log(newData);
+
+        const res = await createTask(newData).unwrap();
+        console.log("res", res);
         setOpen(false)
         form.reset();
         toast("Task has been created", {
@@ -51,6 +58,10 @@ export function AddTaskModel() {
         })
 
     }
+
+
+    if (isLoading) return <p>loading.............</p>
+    if (isError) return <p>something went wrong.............</p>
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>

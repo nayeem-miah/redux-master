@@ -8,9 +8,15 @@ import type { ITask } from "@/types";
 
 
 export default function Task() {
-    const { data, isLoading, isError } = useGetTasksQuery(undefined);
+    const { data, isLoading, isError } = useGetTasksQuery(undefined, {
+        pollingInterval: 30000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true,
+        refetchOnReconnect: true
 
-    console.log({ data, isLoading, isError });
+    });
+
+    // console.log({ data, isLoading, isError });
     if (isError) return <p>Something went wrong</p>
     if (isLoading) return <p>loading............</p>
 
@@ -44,7 +50,7 @@ export default function Task() {
                 {
                     !isLoading && data?.tasks?.map((task: ITask) => (
                         <TaskCard
-                            key={task?.id}
+                            key={task?._id}
                             task={task}
                         />
                     ))
