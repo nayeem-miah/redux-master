@@ -4,8 +4,9 @@ import { CheckCircle, Clock, Edit, Trash2 } from "lucide-react"
 import type { ITask } from "@/types"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { useAppDispatch } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { deleteTask, toggleCompletedTask, updateTask } from "@/redux/features/task/TaskSlice"
+import { selectUser } from "@/redux/features/users/userSlice"
 
 interface IProps {
     task: ITask
@@ -15,6 +16,9 @@ interface IProps {
 export default function TaskCard({ task }: IProps) {
     const date = task?.dueDate?.toString();
     const dispatch = useAppDispatch();
+    const users = useAppSelector(selectUser);
+    const assignData = users.find((user) => user.id === task.assignTo);
+
     return (
         <div>
             <Card className="shadow-md hover:shadow-xl transition">
@@ -38,7 +42,7 @@ export default function TaskCard({ task }: IProps) {
                         <Clock className="w-4 h-4" />
                         Due: {date || "no date found"}
                     </div>
-
+                    <p>assign to : {assignData?.name || "No One"}</p>
                     <div className="flex items-center gap-2 text-sm mt-2">
                         {task.isCompleted ? (
                             <span className="text-green-600 flex items-center gap-1">
