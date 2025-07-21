@@ -29,12 +29,14 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addTask } from "@/redux/features/task/TaskSlice"
 import type { ITask } from "@/types"
 import { selectUser } from "@/redux/features/users/userSlice"
+import { useState } from "react"
+import { toast } from "sonner"
 
 export function AddTaskModel() {
     const form = useForm();
     const dispatch = useAppDispatch();
     const users = useAppSelector(selectUser)
-
+    const [open, setOpen] = useState<boolean>(false)
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         // console.log(data);
         const newData = {
@@ -42,9 +44,20 @@ export function AddTaskModel() {
             dueDate: data.dueDate.toString()
         }
         dispatch(addTask(newData as ITask))
+        setOpen(false)
+        form.reset();
+        toast("Task has been created", {
+            description: "You can see the task in the task list",
+            // duration: 3000,
+            action: {
+                label: "Undo",
+                onClick: () => console.log("Undo"),
+            }
+        })
+
     }
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button>Add task</Button>
             </DialogTrigger>
@@ -123,7 +136,7 @@ export function AddTaskModel() {
                                         <SelectContent>
                                             {
                                                 users.map((user) => (
-                                                    <SelectItem value={user.id}>{user.name}</SelectItem>
+                                                    <SelectItem key={user.id} value={user.id}>{user.name}</SelectItem>
                                                 ))
                                             }
                                         </SelectContent>

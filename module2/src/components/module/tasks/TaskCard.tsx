@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { deleteTask, toggleCompletedTask, updateTask } from "@/redux/features/task/TaskSlice"
 import { selectUser } from "@/redux/features/users/userSlice"
+import { toast } from "sonner"
 
 interface IProps {
     task: ITask
@@ -73,7 +74,8 @@ export default function TaskCard({ task }: IProps) {
                         </Button>
                         <Button
                             variant="destructive"
-                            onClick={() => dispatch(deleteTask(task.id))}
+                            onClick={() => dispatch(deleteTask(task.id),
+                                toast.success("task deleted success "))}
                         >
                             <Trash2 className="w-4 h-4 mr-1" />
                             Delete

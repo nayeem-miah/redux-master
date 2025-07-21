@@ -13,18 +13,26 @@ import { addUser } from "@/redux/features/users/userSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import type { IUser } from "@/types"
 import { DialogDescription } from "@radix-ui/react-dialog"
+import { useState } from "react"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
+import { toast } from "sonner"
 
 
 export function AddUserModel() {
     const form = useForm();
     const dispatch = useAppDispatch();
+    const [open, setOpen] = useState<boolean>(false)
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         dispatch(addUser(data as IUser))
+        setOpen(false)
+        form.reset()
+        toast.success("user created success ✅", {
+            duration: 3000
+        })
     }
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button>Add User</Button>
             </DialogTrigger>
