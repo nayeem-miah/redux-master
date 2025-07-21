@@ -1,69 +1,96 @@
-# React + TypeScript + Vite
+# 🧩 Module2 - React Redux Toolkit + TypeScript App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A scalable React application built with **Redux Toolkit**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**. This project follows a modular structure for better maintainability and scalability.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- ⚛️ React + TypeScript
+- 🧰 Redux Toolkit
+- 🎨 Tailwind CSS
+- 🧩 shadcn/ui
+- 🗂️ Modular folder structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Folder Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+src/
+│
+├── assets/             # Static assets (images, icons, etc.)
+├── components/         # Reusable UI components
+├── lib/                # Utility libraries or helper functions
+├── pages/              # Page-level components
+│   ├── Task.tsx
+│   └── User.tsx
+├── providers/          # Providers (e.g., Redux Provider)
+├── redux/              # Redux state management
+│   ├── features/       # Slices per feature
+│   │   ├── counter/
+│   │   ├── task/
+│   │   └── users/
+│   ├── middlewares/    # Custom middlewares (if any)
+│   ├── hooks.ts        # Typed Redux hooks
+│   └── store.ts        # Redux store configuration
+├── routes/             # Route definitions
+└── App.tsx             # Main app component
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+````
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🧪 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/nayeem-miah/redux-master/tree/main/module2
+cd module2
+````
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧠 Key Features
+
+* 🎯 Feature-based Redux slices (`counter`, `task`, `users`)
+* 🧵 Type-safe Redux logic with `hooks.ts`
+* 📦 Custom middleware support
+* 💅 Styled using Tailwind CSS and `shadcn/ui`
+* 🔄 Scalable and clean folder structure
+
+---
+
+## 📦 Production Build
+
+```bash
+npm run build
+```
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome. For major changes, please open an issue first.
+
+---
+
+## 📄 License
+
+[MIT](LICENSE)
+
 ```
