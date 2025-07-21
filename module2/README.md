@@ -50,7 +50,7 @@ src/
 git clone https://github.com/nayeem-miah/redux-master.git
 cd module2
 ````
-
+ 
 ### 2. Install Dependencies
 
 ```bash
