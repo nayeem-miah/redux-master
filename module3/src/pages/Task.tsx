@@ -1,11 +1,18 @@
 
 import { AddTaskModel } from "@/components/module/tasks/AddTaskModal";
+import TaskCard from "@/components/module/tasks/TaskCard";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useGetTasksQuery } from "@/redux/api/baseApi";
+import type { ITask } from "@/types";
 
 
 export default function Task() {
+    const { data, isLoading, isError } = useGetTasksQuery(undefined);
 
+    console.log({ data, isLoading, isError });
+    if (isError) return <p>Something went wrong</p>
+    if (isLoading) return <p>loading............</p>
 
     return (
         <div>
@@ -34,14 +41,14 @@ export default function Task() {
                 <AddTaskModel />
             </div>
             <div className="my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                {/* {
-                    tasks.map((task) => (
+                {
+                    !isLoading && data?.tasks?.map((task: ITask) => (
                         <TaskCard
                             key={task?.id}
                             task={task}
                         />
                     ))
-                } */}
+                }
             </div>
         </div>
     )

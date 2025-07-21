@@ -4,10 +4,6 @@ import { CheckCircle, Clock, Edit, Trash2 } from "lucide-react"
 import type { ITask } from "@/types"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { deleteTask, toggleCompletedTask, updateTask } from "@/redux/features/task/TaskSlice"
-import { selectUser } from "@/redux/features/users/userSlice"
-import { toast } from "sonner"
 
 interface IProps {
     task: ITask
@@ -16,9 +12,8 @@ interface IProps {
 
 export default function TaskCard({ task }: IProps) {
     const date = task?.dueDate?.toString();
-    const dispatch = useAppDispatch();
-    const users = useAppSelector(selectUser);
-    const assignData = users.find((user) => user.id === task.assignTo);
+
+
 
     return (
         <div>
@@ -43,7 +38,7 @@ export default function TaskCard({ task }: IProps) {
                         <Clock className="w-4 h-4" />
                         Due: {date || "no date found"}
                     </div>
-                    <p>assign to : {assignData?.name || "No One"}</p>
+                    {/* <p>assign to : {assignData?.name || "No One"}</p> */}
                     <div className="flex items-center gap-2 text-sm mt-2">
                         {task.isCompleted ? (
                             <span className="text-green-600 flex items-center gap-1">
@@ -61,21 +56,21 @@ export default function TaskCard({ task }: IProps) {
                     <div className="flex justify-between mt-4">
                         <Button
                             variant="secondary"
-                            onClick={() => dispatch(toggleCompletedTask(task.id))}
+                        // onClick={() => dispatch(toggleCompletedTask(task.id))}
                         >
                             {task.isCompleted ? "Undo" : "Mark as Done"}
                         </Button>
 
                         <Button
-                            onClick={() => dispatch(updateTask(task.id))}
+                        // onClick={() => dispatch(updateTask(task.id))}
                         >
                             <Edit className="w-1 h-4 mr-1" />
                             Update Task
                         </Button>
                         <Button
                             variant="destructive"
-                            onClick={() => dispatch(deleteTask(task.id),
-                                toast.success("task deleted success "))}
+                        // onClick={() => dispatch(deleteTask(task.id),
+                        // toast.success("task deleted success "))}
                         >
                             <Trash2 className="w-4 h-4 mr-1" />
                             Delete
@@ -83,6 +78,6 @@ export default function TaskCard({ task }: IProps) {
                     </div>
                 </CardContent>
             </Card>
-        </div>
+        </div >
     )
 }
