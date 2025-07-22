@@ -1,69 +1,94 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ✅ Task Management App (Frontend)
 
-Currently, two official plugins are available:
+A simple task management application built with **React**, **TypeScript**, **Redux Toolkit (RTK Query)**, **Tailwind CSS**, and **shadcn/ui**.  
+This app connects to the [taskmaster-rtk-server](https://github.com/Apollo-Level2-Web-Dev/taskmaster-rtk-server) backend API code .
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ✅ Add New Task  
+- 📋 View All Tasks  
+- ❌ Delete Task  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🔗 Backend Repository
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+👉 [GitHub – taskmaster-rtk-server](https://github.com/Apollo-Level2-Web-Dev/taskmaster-rtk-server)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React, TypeScript, Redux Toolkit, RTK Query, Tailwind CSS, shadcn/ui  
+- **Backend**: Node.js, Express, MongoDB (via Mongoose)
+
+---
+
+## 📂 Project Structure (Frontend)
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+src/
+├── components/         # Reusable UI components
+├── lib/                # Utility functions
+├── pages/
+│   ├── Task.tsx        # Task List UI
+│   └── User.tsx        # (Not implemented or optional)
+├── redux/
+│   ├── features/
+│   │   ├── task/       # RTK Query API & Slice for tasks
+│   └── store.ts        # Redux store setup
+├── routes/             # Application routes
+├── App.tsx             # App root
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+````
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ▶️ Getting Started (Frontend)
+
+### 1️⃣ Clone the Frontend Repo
+
+```bash
+git clone https://github.com/nayeem-miah/redux-master.git
+cd redux-master/module3
+````
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
 ```
+
+### 3️⃣ Start the App
+
+```bash
+npm run dev
+```
+
+> 🔧 Make sure the [backend server](https://github.com/Apollo-Level2-Web-Dev/taskmaster-rtk-server) is running at `http://localhost:5000`
+
+---
+
+## 🧪 API Endpoints (Used by RTK Query)
+
+| Method | Endpoint     | Description     |
+| ------ | ------------ | --------------- |
+| GET    | `/tasks`     | Fetch all tasks |
+| POST   | `/tasks`     | Add new task    |
+| DELETE | `/tasks/:id` | Delete a task   |
+
+---
+
+## ✨ UI & Styling
+
+This app uses [**shadcn/ui**](https://ui.shadcn.com/) with **Tailwind CSS** for beautiful, accessible components like:
+
+* Cards
+* Buttons
+* Form elements
+
+---
