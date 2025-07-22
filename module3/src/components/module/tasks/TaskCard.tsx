@@ -14,27 +14,37 @@ interface IProps {
 
 export default function TaskCard({ task }: IProps) {
     const date = task?.dueDate?.toString();
-    const [deleteTask] = useDeleteTaskMutation();
+    const [deleteTask, { isLoading }] = useDeleteTaskMutation();
 
 
-    const handleDelete = async (id: string) => {
-        const res = await deleteTask(id);
 
-        if (!res.error) {
-            toast("Task has been deleted", {
-                description: "You can see the task is removed from the task list",
-                action: {
-                    label: "❌",
-                    onClick: () => console.log("Undo"),
-                }
-            });
-        } else {
-            toast.error("Failed to delete task", {
-                description: "Something went wrong while deleting the task",
-            });
-        }
-    }
+    const handleDelete = (taskId: string) => {
+        toast.warning('Are you sure you want to delete this task?', {
+            description: 'This action cannot be undone.',
+            action: {
+                label: 'Yes, Delete',
+                onClick: async () => {
+                    try {
+                        await deleteTask(taskId).unwrap();
+                        toast.success('✅ Task deleted successfully!');
+                    } catch {
+                        toast.error('❌ Failed to delete task!');
+                    }
+                },
+            },
+            cancel: {
+                label: 'Cancel',
+                onClick: () => {
+                    toast.info('Task deletion cancelled.');
+                },
+            },
+            duration: 6000,
+        });
+    };
 
+    if (isLoading) return <p>Loading tasks...</p>;
+
+    if (isLoading) return <p>Deleting...</p>;
     return (
         <div>
             <Card className="shadow-md hover:shadow-xl transition">

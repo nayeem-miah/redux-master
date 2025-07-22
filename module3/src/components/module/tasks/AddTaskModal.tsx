@@ -32,8 +32,7 @@ import { useCrateTaskMutation } from "@/redux/api/baseApi"
 export function AddTaskModel() {
     const form = useForm();
     const [createTask, { data, isLoading, isError }] = useCrateTaskMutation()
-
-    console.log(data);
+    console.log("data", data);
 
     const [open, setOpen] = useState<boolean>(false)
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
