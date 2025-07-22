@@ -4,6 +4,8 @@ import { CheckCircle, Clock, Edit, Trash2 } from "lucide-react"
 import type { ITask } from "@/types"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
+import { useDeleteTaskMutation } from "@/redux/api/baseApi"
 
 interface IProps {
     task: ITask
@@ -12,8 +14,26 @@ interface IProps {
 
 export default function TaskCard({ task }: IProps) {
     const date = task?.dueDate?.toString();
+    const [deleteTask] = useDeleteTaskMutation();
 
 
+    const handleDelete = async (id: string) => {
+        const res = await deleteTask(id);
+
+        if (!res.error) {
+            toast("Task has been deleted", {
+                description: "You can see the task is removed from the task list",
+                action: {
+                    label: "❌",
+                    onClick: () => console.log("Undo"),
+                }
+            });
+        } else {
+            toast.error("Failed to delete task", {
+                description: "Something went wrong while deleting the task",
+            });
+        }
+    }
 
     return (
         <div>
@@ -69,8 +89,7 @@ export default function TaskCard({ task }: IProps) {
                         </Button>
                         <Button
                             variant="destructive"
-                        // onClick={() => dispatch(deleteTask(task.id),
-                        // toast.success("task deleted success "))}
+                            onClick={() => handleDelete(task._id)}
                         >
                             <Trash2 className="w-4 h-4 mr-1" />
                             Delete
